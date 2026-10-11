@@ -33,7 +33,9 @@ def test_providers_reports_availability(client):
 
 
 def test_mock_generation_produces_mp4(client):
-    r = client.post("/api/jobs", json={"prompt": "a red fox in the snow", "seconds": 1, "width": 320, "height": 192})
+    r = client.post(
+        "/api/jobs", json={"prompt": "a red fox in the snow", "seconds": 1, "width": 320, "height": 192}
+    )
     assert r.status_code == 201
     job = wait_for(client, r.json()["id"])
     assert job["status"] == "succeeded", job["error"]

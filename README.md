@@ -15,6 +15,7 @@
 | `mock` | Anywhere | Nothing | Animated title card with your prompt. For development and CI. |
 | `replicate` | Replicate's cloud GPUs | `REPLICATE_API_TOKEN` | Default model `lightricks/ltx-video`. Billed per run by Replicate. |
 | `local` | Your GPU (Apple silicon or NVIDIA) | `pip install -e '.[local]'` | Runs [LTX-Video](https://huggingface.co/Lightricks/LTX-Video) via diffusers. Experimental on 16 GB Macs. |
+| `huggingface` | A public Hugging Face Space | `pip install -e '.[huggingface]'` | **Free, for testing only.** Uses the [LTX-Video demo Space](https://huggingface.co/spaces/Lightricks/ltx-video-distilled) on shared GPUs. Rate-limited, not enabled by default. |
 
 > **Why can't `local` run in a container on a Mac?** Linux containers on macOS (both apple/container and Docker Desktop) run inside a lightweight VM that has no access to the Mac's GPU. Run Kinora natively on macOS if you want to use your Apple silicon GPU.
 
@@ -36,6 +37,15 @@ Open http://127.0.0.1:8000 and generate with the **Mock** provider.
 export REPLICATE_API_TOKEN=r8_...
 python -m kinora
 ```
+
+### Try real generation for free (testing)
+
+```bash
+pip install -e '.[huggingface]'
+KINORA_PROVIDERS=mock,huggingface python -m kinora
+```
+
+This sends prompts to a public demo Space with a daily GPU quota (a free `HF_TOKEN` raises it). It's great for trying Kinora but not for regular use; use Replicate or your own GPU for that.
 
 ### Use your own GPU
 
@@ -75,7 +85,9 @@ All settings are environment variables:
 | `KINORA_DEFAULT_PROVIDER` | `mock` | Provider selected by default |
 | `KINORA_REPLICATE_MODEL` | `lightricks/ltx-video` | Replicate model (`owner/name`) |
 | `KINORA_LOCAL_MODEL` | `Lightricks/LTX-Video` | Hugging Face model id for `local` |
+| `KINORA_HF_SPACE` | `Lightricks/ltx-video-distilled` | Space used by the `huggingface` provider |
 | `REPLICATE_API_TOKEN` | – | Enables the `replicate` provider |
+| `HF_TOKEN` | – | Optional; raises the `huggingface` provider's free quota |
 
 ## API
 

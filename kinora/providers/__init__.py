@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from ..config import Settings
 from .base import GenerationRequest, Provider, ProviderError
+from .huggingface import HuggingFaceSpaceProvider
 from .local import LocalProvider
 from .mock import MockProvider
 from .replicate import ReplicateProvider
@@ -14,6 +15,7 @@ def build_providers(settings: Settings) -> dict[str, Provider]:
         "mock": lambda: MockProvider(),
         "replicate": lambda: ReplicateProvider(settings),
         "local": lambda: LocalProvider(settings),
+        "huggingface": lambda: HuggingFaceSpaceProvider(settings),
     }
     unknown = set(settings.providers) - factories.keys()
     if unknown:

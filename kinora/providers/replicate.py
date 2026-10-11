@@ -20,7 +20,9 @@ class ReplicateProvider(Provider):
     def __init__(self, settings: Settings) -> None:
         self.token = settings.replicate_token
         self.model = settings.replicate_model
-        self.description = f"Runs {self.model} on Replicate's GPUs. Needs REPLICATE_API_TOKEN; billed per run."
+        self.description = (
+            f"Runs {self.model} on Replicate's GPUs. Needs REPLICATE_API_TOKEN; billed per run."
+        )
 
     def available(self) -> tuple[bool, str]:
         if not self.token:

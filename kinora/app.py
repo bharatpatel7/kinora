@@ -52,7 +52,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         items = []
         for p in providers.values():
             ok, reason = p.available()
-            items.append({"name": p.name, "label": p.label, "description": p.description, "available": ok, "reason": reason})
+            items.append(
+                {
+                    "name": p.name,
+                    "label": p.label,
+                    "description": p.description,
+                    "available": ok,
+                    "reason": reason,
+                }
+            )
         return {"default": settings.default_provider, "providers": items}
 
     @app.post("/api/jobs", status_code=201)

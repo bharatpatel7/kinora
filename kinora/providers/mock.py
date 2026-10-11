@@ -39,7 +39,9 @@ class MockProvider(Provider):
                 alpha = int(255 * min(1.0, t * 4))  # fade text in
                 for n, line in enumerate(lines):
                     w = draw.textlength(line, font=font)
-                    draw.text(((req.width - w) / 2, y0 + n * line_h), line, font=font, fill=(255, 255, 255, alpha))
+                    draw.text(
+                        ((req.width - w) / 2, y0 + n * line_h), line, font=font, fill=(255, 255, 255, alpha)
+                    )
                 draw.text((12, req.height - font.size - 12), "kinora · mock", font=font, fill=(255, 255, 255))
                 writer.append_data(np.asarray(img))
                 progress((i + 1) / req.num_frames)

@@ -67,7 +67,9 @@ class JobManager:
                 job.progress = round(max(job.progress, min(p, 1.0)), 3)
 
             try:
-                await asyncio.to_thread(self.providers[job.provider].generate, job.request, out_path, progress)
+                await asyncio.to_thread(
+                    self.providers[job.provider].generate, job.request, out_path, progress
+                )
                 job.status, job.progress, job.video_url = "succeeded", 1.0, f"/outputs/{out_path.name}"
             except ProviderError as e:
                 job.status, job.error = "failed", str(e)
