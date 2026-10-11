@@ -62,8 +62,10 @@ With **apple/container** (Apple silicon, macOS 26+):
 
 ```bash
 container build --tag kinora --file Containerfile .
-container run --rm -p 8000:8000 -e REPLICATE_API_TOKEN kinora
+container run --rm -p 127.0.0.1:8000:8000 -e REPLICATE_API_TOKEN kinora
 ```
+
+> **On a VPN?** Many VPNs (NordVPN, corporate VPNs) silently drop traffic from container VMs, so the build fails with "Network is unreachable". Run `scripts/container-proxy.sh start` (needs `brew install tinyproxy`). It starts a proxy that only the container network can reach, so containers use your Mac's VPN connection, and it prints the `build` and `run` commands to use. Stop it with `scripts/container-proxy.sh stop`.
 
 With **Docker**:
 
