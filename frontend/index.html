@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kinora</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>kinora</h1>
+    <p class="tagline">Type a prompt, get a clip. Open source, self-hosted.</p>
+  </header>
+
+  <main>
+    <form id="gen-form">
+      <textarea id="prompt" rows="3" maxlength="2000" required
+        placeholder="A slow aerial shot over a misty pine forest at sunrise, golden light, cinematic"></textarea>
+
+      <details>
+        <summary>Advanced</summary>
+        <label>Negative prompt
+          <input id="negative" type="text" placeholder="blurry, distorted, low quality">
+        </label>
+        <div class="row">
+          <label>Width <input id="width" type="number" value="768" min="128" max="1280" step="32"></label>
+          <label>Height <input id="height" type="number" value="432" min="128" max="1280" step="32"></label>
+          <label>Seconds <input id="seconds" type="number" value="4" min="1" max="10" step="1"></label>
+          <label>Seed <input id="seed" type="number" placeholder="random"></label>
+        </div>
+      </details>
+
+      <div class="row actions">
+        <select id="provider" aria-label="Provider"></select>
+        <button type="submit" id="submit">Generate</button>
+      </div>
+      <p id="provider-note" class="note"></p>
+      <p id="error" class="error" hidden></p>
+    </form>
+
+    <section id="jobs" aria-live="polite"></section>
+  </main>
+
+  <footer>
+    <a href="https://github.com/" id="repo-link">GitHub</a> · Apache-2.0
+  </footer>
+
+  <script src="/static/app.js" type="module"></script>
+</body>
+</html>
