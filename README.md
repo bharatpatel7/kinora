@@ -21,7 +21,7 @@
 ## Quick start (native, macOS / Linux)
 
 ```bash
-git clone https://github.com/<you>/kinora.git
+git clone https://github.com/bharatpatel7/kinora.git
 cd kinora
 python3 -m venv .venv && source .venv/bin/activate
 pip install -e '.[dev]'
